@@ -280,7 +280,6 @@ surfaceMobile.addEventListener("click", () => {
 });
 
 logoBtn.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
   geologyImage.classList.add("hidden");
   mercuryPlanet.classList.add("active-link");
   venusPlanet.classList.remove("active-link");
