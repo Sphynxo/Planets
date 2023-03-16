@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+
   background-color: #070724;
   background-image: url(../IMG/background-stars.svg);
 
@@ -499,7 +499,7 @@ main {
     /* 3) Hide it from screen readers */
     visibility: hidden;
     z-index: 99999;
-    overflow-x: hidden;
+
   }
   .fa-circle {
     display: inline;
