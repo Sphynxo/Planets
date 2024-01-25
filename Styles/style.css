@@ -236,6 +236,11 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
+.btn:hover {
+  background-color: #d8d8d820;
+  border-color: #D8D8D820;
+}
+
 .active-btn {
   background-color: #419ebb;
   border: 0.1rem solid #419ebb;

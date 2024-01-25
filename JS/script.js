@@ -12,7 +12,7 @@ const planets = {
     rotation: "58.6 days",
     revolution: "87.97 days",
     radius: "2,4739.7 KM",
-    temperature: "430°C",
+    temperature: "430° C",
     image: "IMG/planet-mercury.svg",
     internal: "IMG/planet-mercury-internal.svg",
     geology: "IMG/geology-mercury.png",
@@ -30,7 +30,7 @@ const planets = {
     rotation: "243 Days",
     revolution: "224.7 Days",
     radius: "6,051.8 KM",
-    temperature: "471°C",
+    temperature: "471° C",
     image: "IMG/planet-venus.svg",
     internal: "IMG/planet-venus-internal.svg",
     geology: "IMG/geology-venus.png",
@@ -48,7 +48,7 @@ const planets = {
     rotation: "0.99 Days",
     revolution: "365.26 Days",
     radius: "6,371 KM",
-    temperature: "16°C",
+    temperature: "16° C",
     image: "IMG/planet-earth.svg",
     internal: "IMG/planet-earth-internal.svg",
     geology: "IMG/geology-earth.png",
@@ -66,7 +66,7 @@ const planets = {
     rotation: "1.03 Days",
     revolution: "1.89 years",
     radius: "3,389.5 KM",
-    temperature: "-28°C",
+    temperature: "-28° C",
     image: "IMG/planet-mars.svg",
     internal: "IMG/planet-mars-internal.svg",
     geology: "IMG/geology-mars.png",
@@ -84,7 +84,7 @@ const planets = {
     rotation: "9.93 hours",
     revolution: "11.86 Years",
     radius: "69,911 KM",
-    temperature: "-108°C",
+    temperature: "-108° C",
     image: "IMG/planet-jupiter.svg",
     internal: "IMG/planet-jupiter-internal.svg",
     geology: "IMG/geology-jupiter.png",
@@ -102,7 +102,7 @@ const planets = {
     rotation: "10.8 Hours",
     revolution: "29.46 Years",
     radius: "58,232 KM",
-    temperature: "-138°c",
+    temperature: "-138° C",
     image: "IMG/planet-saturn.svg",
     internal: "IMG/planet-saturn-internal.svg",
     geology: "IMG/geology-saturn.png",
@@ -120,7 +120,7 @@ const planets = {
     rotation: "17.2 Hours",
     revolution: "84 Years",
     radius: "25,362 KM",
-    temperature: "-195°c",
+    temperature: "-195° C",
     image: "IMG/planet-uranus.svg",
     internal: "IMG/planet-uranus-internal.svg",
     geology: "IMG/geology-uranus.png",
@@ -138,7 +138,7 @@ const planets = {
     rotation: "16.08 Hours",
     revolution: "164.79 Years",
     radius: "24,622 KM",
-    temperature: "-201°c",
+    temperature: "-201° C",
     image: "IMG/planet-neptune.svg",
     internal: "IMG/planet-neptune-internal.svg",
     geology: "IMG/geology-neptune.png",
@@ -153,1096 +153,66 @@ btnNavEl.addEventListener("click", function () {
   headerEl.classList.toggle("nav-open");
 });
 
-let allPlanets = document.querySelectorAll(".main-nav-link");
-let planetImage = document.querySelector(".planet-image");
-let geologyImage = document.querySelector(".planet-geology");
-let planetName = document.querySelector(".planet-name");
-let planetText = document.querySelector(".description");
-let srcLink = document.querySelector(".src-link");
-let overviewBtn = document.querySelector(".overview-dt");
-let structureBtn = document.querySelector(".structure-dt");
-let surfaceBtn = document.querySelector(".surface-dt");
-let activeBtn = document.querySelector(".active-btn");
-let rotateInfo = document.querySelector(".rotate-info");
-let revolutionInfo = document.querySelector(".revolution-info");
-let temperatureInfo = document.querySelector(".temp-info");
-let radiusInfo = document.querySelector(".radius-info");
-let overviewMobile = document.querySelector(".overview-mobile");
-let structureMobile = document.querySelector(".structure-mobile");
-let surfaceMobile = document.querySelector(".surface-mobile");
+const planetName = document.querySelector(".planet-name");
+const image = document.querySelector(".planet-image");
+const description = document.querySelector(".description");
+const link = document.querySelector(".link");
+const rotate = document.querySelector(".rotate-info");
+const revolution = document.querySelector(".revolution-info");
+const radius = document.querySelector(".radius-info");
+const temp = document.querySelector(".temp-info");
+const buttons = document.querySelectorAll(".btn");
+const activeBtn = document.querySelector('.active-btn')
+const planetNames = document.querySelectorAll(".main-nav-link");
+let currentPlanet = planets['mercury'];
+planetName.textContent = currentPlanet.name;
+description.textContent = currentPlanet.overview;
+rotate.textContent = currentPlanet.rotation;
+revolution.textContent = currentPlanet.revolution;
+radius.textContent = currentPlanet.radius;
+temp.textContent = currentPlanet.temperature
+
+
+planetNames.forEach((planet) =>
+  planet.addEventListener("click", function () {
+    buttons.forEach((b) => b.classList.remove("active-btn"));
+
+    planetNames.forEach((p) => p.classList.remove("active-link"));
+    planet.classList.add("active-link");
+    if (planet.classList.contains("active-link")) {
+      const currentPlanetName = planet.textContent.toLowerCase();
+      currentPlanet = planets[currentPlanetName];
+      updateInfo(currentPlanet);
+    }
+
+    function updateInfo(planet) {
+      planetName.textContent = planet.name;
+      description.textContent = planet.overview;
+      rotate.textContent = planet.rotation;
+      revolution.textContent = planet.revolution;
+      radius.textContent = planet.radius;
+      temp.textContent = planet.temperature;
+      image.src = planet.image;
+      activeBtn.style.backgroundColor = planet.color
+    }
+  })
+);
+
+buttons.forEach((button) =>
+  button.addEventListener("click", function () {
+    buttons.forEach((b) => b.classList.remove("active-btn"));
+    button.classList.add("active-btn");
+    
+    if (button.classList.contains("overview")) {
+      description.textContent = currentPlanet.overview;
+      image.src = currentPlanet.image
+    } else if (button.classList.contains("structure")) {
+      description.textContent = currentPlanet.structure;
+      image.src = currentPlanet.internal
+    } else if (button.classList.contains("surface")) {
+      description.textContent = currentPlanet.surface;
+      image.src = currentPlanet.geology
+    }
+  })
+);
 
-let mercuryPlanet = document.querySelector(".mercury");
-let venusPlanet = document.querySelector(".venus");
-let earthPlanet = document.querySelector(".earth");
-let marsPlanet = document.querySelector(".mars");
-let jupiterPlanet = document.querySelector(".jupiter");
-let saturnPlanet = document.querySelector(".saturn");
-let uranusPlanet = document.querySelector(".uranus");
-let neptunePlanet = document.querySelector(".neptune");
-const logoBtn = document.querySelector(".logo");
-
-mercuryPlanet.classList.add("active-link");
-venusPlanet.classList.remove("active-link");
-earthPlanet.classList.remove("active-link");
-marsPlanet.classList.remove("active-link");
-jupiterPlanet.classList.remove("active-link");
-saturnPlanet.classList.remove("active-link");
-uranusPlanet.classList.remove("active-link");
-neptunePlanet.classList.remove("active-link");
-planetName.textContent = planets.mercury.name;
-planetText.textContent = planets.mercury.overview;
-planetImage.src = planets.mercury.image;
-activeBtn.style.backgroundColor = planets.mercury.color;
-activeBtn.style.borderColor = planets.mercury.color;
-rotateInfo.textContent = planets.mercury.rotation;
-revolutionInfo.textContent = planets.mercury.revolution;
-radiusInfo.textContent = planets.mercury.radius;
-temperatureInfo.textContent = planets.mercury.temperature;
-overviewBtn.style.backgroundColor = planets.mercury.color;
-overviewBtn.style.borderColor = planets.mercury.color;
-overviewMobile.style.borderBottom = "4px solid #419EBB";
-structureBtn.style.backgroundColor = "transparent";
-structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-surfaceBtn.style.backgroundColor = "transparent";
-surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-overviewBtn.addEventListener("click", () => {
-  planetText.textContent = planets.mercury.overview;
-  planetImage.src = planets.mercury.image;
-  geologyImage.classList.add("hidden");
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  overviewBtn.style.backgroundColor = planets.mercury.color;
-  overviewBtn.style.borderColor = planets.mercury.color;
-});
-
-structureBtn.addEventListener("click", () => {
-  planetText.textContent = planets.mercury.structure;
-  planetImage.src = planets.mercury.internal;
-  geologyImage.classList.add("hidden");
-  overviewBtn.style.backgroundColor = "transparent";
-  overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  structureBtn.style.backgroundColor = planets.mercury.color;
-  structureBtn.style.borderColor = planets.mercury.color;
-});
-
-surfaceBtn.addEventListener("click", () => {
-  planetText.textContent = planets.mercury.surface;
-  planetImage.src = planets.mercury.image;
-  geologyImage.src = planets.mercury.geology;
-  geologyImage.classList.remove("hidden");
-  overviewBtn.style.backgroundColor = "transparent";
-  overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = planets.mercury.color;
-  surfaceBtn.style.borderColor = planets.mercury.color;
-});
-
-overviewMobile.addEventListener("click", () => {
-  planetText.textContent = planets.mercury.overview;
-  planetImage.src = planets.mercury.image;
-  geologyImage.classList.add("hidden");
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-  // structureMobile.style.backgroundColor = planets.mercury.color;
-  overviewMobile.style.borderBottom = "4px solid #419EBB";
-});
-
-structureMobile.addEventListener("click", () => {
-  planetText.textContent = planets.mercury.structure;
-  planetImage.src = planets.mercury.internal;
-  geologyImage.classList.add("hidden");
-  overviewMobile.style.backgroundColor = "transparent";
-  overviewMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-  // structureMobile.style.backgroundColor = planets.mercury.color;
-  structureMobile.style.borderBottom = "4px solid #419EBB";
-});
-
-surfaceMobile.addEventListener("click", () => {
-  planetText.textContent = planets.mercury.surface;
-  planetImage.src = planets.mercury.image;
-  geologyImage.classList.remove("hidden");
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  overviewMobile.style.backgroundColor = "transparent";
-  overviewMobile.style.border = "none";
-  // structureMobile.style.backgroundColor = planets.mercury.color;
-  surfaceMobile.style.borderBottom = "4px solid #419EBB";
-});
-
-logoBtn.addEventListener("click", () => {
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.add("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.mercury.name;
-  planetText.textContent = planets.mercury.overview;
-  planetImage.src = planets.mercury.image;
-  activeBtn.style.backgroundColor = planets.mercury.color;
-  activeBtn.style.borderColor = planets.mercury.color;
-  rotateInfo.textContent = planets.mercury.rotation;
-  revolutionInfo.textContent = planets.mercury.revolution;
-  radiusInfo.textContent = planets.mercury.radius;
-  temperatureInfo.textContent = planets.mercury.temperature;
-  overviewBtn.style.backgroundColor = planets.mercury.color;
-  overviewBtn.style.borderColor = planets.mercury.color;
-  overviewMobile.style.borderBottom = "4px solid #419EBB";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.overview;
-    planetImage.src = planets.mercury.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.mercury.color;
-    overviewBtn.style.borderColor = planets.mercury.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.structure;
-    planetImage.src = planets.mercury.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.mercury.color;
-    structureBtn.style.borderColor = planets.mercury.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.surface;
-    planetImage.src = planets.mercury.image;
-    geologyImage.src = planets.mercury.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.mercury.color;
-    surfaceBtn.style.borderColor = planets.mercury.color;
-  });
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.overview;
-    planetImage.src = planets.mercury.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #419EBB";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.structure;
-    planetImage.src = planets.mercury.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #419EBB";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.surface;
-    planetImage.src = planets.mercury.image;
-    geologyImage.src = planets.mercury.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #419EBB";
-  });
-});
-
-mercuryPlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.add("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.mercury.name;
-  planetText.textContent = planets.mercury.overview;
-  planetImage.src = planets.mercury.image;
-  activeBtn.style.backgroundColor = planets.mercury.color;
-  activeBtn.style.borderColor = planets.mercury.color;
-  rotateInfo.textContent = planets.mercury.rotation;
-  revolutionInfo.textContent = planets.mercury.revolution;
-  radiusInfo.textContent = planets.mercury.radius;
-  temperatureInfo.textContent = planets.mercury.temperature;
-  overviewBtn.style.backgroundColor = planets.mercury.color;
-  overviewBtn.style.borderColor = planets.mercury.color;
-  overviewMobile.style.borderBottom = "4px solid #419EBB";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.overview;
-    planetImage.src = planets.mercury.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.mercury.color;
-    overviewBtn.style.borderColor = planets.mercury.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.structure;
-    planetImage.src = planets.mercury.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.mercury.color;
-    structureBtn.style.borderColor = planets.mercury.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.surface;
-    planetImage.src = planets.mercury.image;
-    geologyImage.src = planets.mercury.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.mercury.color;
-    surfaceBtn.style.borderColor = planets.mercury.color;
-  });
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.overview;
-    planetImage.src = planets.mercury.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #419EBB";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.structure;
-    planetImage.src = planets.mercury.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #419EBB";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mercury.surface;
-    planetImage.src = planets.mercury.image;
-    geologyImage.src = planets.mercury.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #419EBB";
-  });
-});
-
-venusPlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.remove("active-link");
-  venusPlanet.classList.add("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.venus.name;
-  planetText.textContent = planets.venus.overview;
-  planetImage.src = planets.venus.image;
-  activeBtn.style.backgroundColor = planets.venus.color;
-  activeBtn.style.borderColor = planets.venus.color;
-  rotateInfo.textContent = planets.venus.rotation;
-  revolutionInfo.textContent = planets.venus.revolution;
-  radiusInfo.textContent = planets.venus.radius;
-  temperatureInfo.textContent = planets.venus.temperature;
-  overviewMobile.style.borderBottom = "4px solid #EDA249";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-  overviewBtn.style.backgroundColor = planets.venus.color;
-  overviewBtn.style.borderColor = planets.venus.color;
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.venus.overview;
-    planetImage.src = planets.venus.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.venus.color;
-    overviewBtn.style.borderColor = planets.venus.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.venus.structure;
-    planetImage.src = planets.venus.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.venus.color;
-    structureBtn.style.borderColor = planets.venus.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.venus.surface;
-    planetImage.src = planets.venus.image;
-    geologyImage.src = planets.venus.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.venus.color;
-    surfaceBtn.style.borderColor = planets.venus.color;
-  });
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.venus.overview;
-    planetImage.src = planets.venus.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #EDA249";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.venus.structure;
-    planetImage.src = planets.venus.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #EDA249";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.venus.surface;
-    planetImage.src = planets.venus.image;
-    geologyImage.src = planets.venus.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #EDA249";
-  });
-});
-
-earthPlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.remove("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.add("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.earth.name;
-  planetText.textContent = planets.earth.overview;
-  planetImage.src = planets.earth.image;
-  activeBtn.style.backgroundColor = planets.earth.color;
-  activeBtn.style.borderColor = planets.earth.color;
-  rotateInfo.textContent = planets.earth.rotation;
-  revolutionInfo.textContent = planets.earth.revolution;
-  radiusInfo.textContent = planets.earth.radius;
-  temperatureInfo.textContent = planets.earth.temperature;
-  overviewBtn.style.backgroundColor = planets.earth.color;
-  overviewBtn.style.borderColor = planets.earth.color;
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.earth.overview;
-    planetImage.src = planets.earth.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.earth.color;
-    overviewBtn.style.borderColor = planets.earth.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.earth.structure;
-    planetImage.src = planets.earth.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.earth.color;
-    structureBtn.style.borderColor = planets.earth.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.earth.surface;
-    planetImage.src = planets.earth.image;
-    geologyImage.src = planets.earth.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.earth.color;
-    surfaceBtn.style.borderColor = planets.earth.color;
-  });
-
-  overviewMobile.style.borderBottom = "4px solid #6D2ED5";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.earth.overview;
-    planetImage.src = planets.earth.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #6D2ED5";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.earth.structure;
-    planetImage.src = planets.earth.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #6D2ED5";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.earth.surface;
-    planetImage.src = planets.earth.image;
-    geologyImage.src = planets.earth.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #6D2ED5";
-  });
-});
-
-marsPlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.remove("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.add("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.mars.name;
-  planetText.textContent = planets.mars.overview;
-  planetImage.src = planets.mars.image;
-  activeBtn.style.backgroundColor = planets.mars.color;
-  activeBtn.style.borderColor = planets.mars.color;
-  rotateInfo.textContent = planets.mars.rotation;
-  revolutionInfo.textContent = planets.mars.revolution;
-  radiusInfo.textContent = planets.mars.radius;
-  temperatureInfo.textContent = planets.mars.temperature;
-  overviewBtn.style.backgroundColor = planets.mars.color;
-  overviewBtn.style.borderColor = planets.mars.color;
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mars.overview;
-    planetImage.src = planets.mars.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.mars.color;
-    overviewBtn.style.borderColor = planets.mars.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mars.structure;
-    planetImage.src = planets.mars.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.mars.color;
-    structureBtn.style.borderColor = planets.mars.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.mars.surface;
-    planetImage.src = planets.mars.image;
-    geologyImage.src = planets.mars.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.mars.color;
-    surfaceBtn.style.borderColor = planets.mars.color;
-  });
-
-  overviewMobile.style.borderBottom = "4px solid #D14C32";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mars.overview;
-    planetImage.src = planets.mars.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #D14C32";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mars.structure;
-    planetImage.src = planets.mars.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #D14C32";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.mars.surface;
-    planetImage.src = planets.mars.image;
-    geologyImage.src = planets.mars.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #D14C32";
-  });
-});
-
-jupiterPlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.remove("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.add("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.jupiter.name;
-  planetText.textContent = planets.jupiter.overview;
-  planetImage.src = planets.jupiter.image;
-  activeBtn.style.backgroundColor = planets.jupiter.color;
-  activeBtn.style.borderColor = planets.jupiter.color;
-  rotateInfo.textContent = planets.jupiter.rotation;
-  revolutionInfo.textContent = planets.jupiter.revolution;
-  radiusInfo.textContent = planets.jupiter.radius;
-  temperatureInfo.textContent = planets.jupiter.temperature;
-  overviewBtn.style.backgroundColor = planets.jupiter.color;
-  overviewBtn.style.borderColor = planets.jupiter.color;
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.jupiter.overview;
-    planetImage.src = planets.jupiter.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.jupiter.color;
-    overviewBtn.style.borderColor = planets.jupiter.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.jupiter.structure;
-    planetImage.src = planets.jupiter.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.jupiter.color;
-    structureBtn.style.borderColor = planets.jupiter.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.jupiter.surface;
-    planetImage.src = planets.jupiter.image;
-    geologyImage.src = planets.jupiter.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.jupiter.color;
-    surfaceBtn.style.borderColor = planets.jupiter.color;
-  });
-
-  overviewMobile.style.borderBottom = "4px solid #D83A34";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.jupiter.overview;
-    planetImage.src = planets.jupiter.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #D83A34";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.jupiter.structure;
-    planetImage.src = planets.jupiter.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #D83A34";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.jupiter.surface;
-    planetImage.src = planets.jupiter.image;
-    geologyImage.src = planets.jupiter.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #D83A34";
-  });
-});
-
-saturnPlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.remove("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.add("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.saturn.name;
-  planetText.textContent = planets.saturn.overview;
-  planetImage.src = planets.saturn.image;
-  activeBtn.style.backgroundColor = planets.saturn.color;
-  activeBtn.style.borderColor = planets.saturn.color;
-  rotateInfo.textContent = planets.saturn.rotation;
-  revolutionInfo.textContent = planets.saturn.revolution;
-  radiusInfo.textContent = planets.saturn.radius;
-  temperatureInfo.textContent = planets.saturn.temperature;
-  overviewBtn.style.backgroundColor = planets.saturn.color;
-  overviewBtn.style.borderColor = planets.saturn.color;
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.saturn.overview;
-    planetImage.src = planets.saturn.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.saturn.color;
-    overviewBtn.style.borderColor = planets.saturn.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.saturn.structure;
-    planetImage.src = planets.saturn.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.saturn.color;
-    structureBtn.style.borderColor = planets.saturn.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.saturn.surface;
-    planetImage.src = planets.saturn.image;
-    geologyImage.src = planets.saturn.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.saturn.color;
-    surfaceBtn.style.borderColor = planets.saturn.color;
-  });
-
-  overviewMobile.style.borderBottom = "4px solid #CD5120";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.saturn.overview;
-    planetImage.src = planets.saturn.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #CD5120";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.saturn.structure;
-    planetImage.src = planets.saturn.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #CD5120";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.saturn.surface;
-    planetImage.src = planets.saturn.image;
-    geologyImage.src = planets.saturn.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #CD5120";
-  });
-});
-
-uranusPlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.remove("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.add("active-link");
-  neptunePlanet.classList.remove("active-link");
-  planetName.textContent = planets.uranus.name;
-  planetText.textContent = planets.uranus.overview;
-  planetImage.src = planets.uranus.image;
-  activeBtn.style.backgroundColor = planets.uranus.color;
-  activeBtn.style.borderColor = planets.uranus.color;
-  rotateInfo.textContent = planets.uranus.rotation;
-  revolutionInfo.textContent = planets.uranus.revolution;
-  radiusInfo.textContent = planets.uranus.radius;
-  temperatureInfo.textContent = planets.uranus.temperature;
-  overviewBtn.style.backgroundColor = planets.uranus.color;
-  overviewBtn.style.borderColor = planets.uranus.color;
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.uranus.overview;
-    planetImage.src = planets.uranus.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.uranus.color;
-    overviewBtn.style.borderColor = planets.uranus.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.uranus.structure;
-    planetImage.src = planets.uranus.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.uranus.color;
-    structureBtn.style.borderColor = planets.uranus.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.uranus.surface;
-    planetImage.src = planets.uranus.image;
-    geologyImage.src = planets.uranus.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.uranus.color;
-    surfaceBtn.style.borderColor = planets.uranus.color;
-  });
-
-  overviewMobile.style.borderBottom = "4px solid #1EC1A2";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.uranus.overview;
-    planetImage.src = planets.uranus.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #1EC1A2";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.uranus.structure;
-    planetImage.src = planets.uranus.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #1EC1A2";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.uranus.surface;
-    planetImage.src = planets.uranus.image;
-    geologyImage.src = planets.uranus.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #1EC1A2";
-  });
-});
-
-neptunePlanet.addEventListener("click", () => {
-  headerEl.classList.toggle("nav-open");
-  geologyImage.classList.add("hidden");
-  mercuryPlanet.classList.remove("active-link");
-  venusPlanet.classList.remove("active-link");
-  earthPlanet.classList.remove("active-link");
-  marsPlanet.classList.remove("active-link");
-  jupiterPlanet.classList.remove("active-link");
-  saturnPlanet.classList.remove("active-link");
-  uranusPlanet.classList.remove("active-link");
-  neptunePlanet.classList.add("active-link");
-  planetName.textContent = planets.neptune.name;
-  planetText.textContent = planets.neptune.overview;
-  planetImage.src = planets.neptune.image;
-  activeBtn.style.backgroundColor = planets.neptune.color;
-  activeBtn.style.borderColor = planets.neptune.color;
-  rotateInfo.textContent = planets.neptune.rotation;
-  revolutionInfo.textContent = planets.neptune.revolution;
-  radiusInfo.textContent = planets.neptune.radius;
-  temperatureInfo.textContent = planets.neptune.temperature;
-  overviewBtn.style.backgroundColor = planets.neptune.color;
-  overviewBtn.style.borderColor = planets.neptune.color;
-  structureBtn.style.backgroundColor = "transparent";
-  structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-  surfaceBtn.style.backgroundColor = "transparent";
-  surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-
-  overviewBtn.addEventListener("click", () => {
-    planetText.textContent = planets.neptune.overview;
-    planetImage.src = planets.neptune.image;
-    geologyImage.classList.add("hidden");
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    overviewBtn.style.backgroundColor = planets.neptune.color;
-    overviewBtn.style.borderColor = planets.neptune.color;
-  });
-
-  structureBtn.addEventListener("click", () => {
-    planetText.textContent = planets.neptune.structure;
-    planetImage.src = planets.neptune.internal;
-    geologyImage.classList.add("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = "transparent";
-    surfaceBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = planets.neptune.color;
-    structureBtn.style.borderColor = planets.neptune.color;
-  });
-
-  surfaceBtn.addEventListener("click", () => {
-    planetText.textContent = planets.neptune.surface;
-    planetImage.src = planets.neptune.image;
-    geologyImage.src = planets.neptune.geology;
-    geologyImage.classList.remove("hidden");
-    overviewBtn.style.backgroundColor = "transparent";
-    overviewBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    structureBtn.style.backgroundColor = "transparent";
-    structureBtn.style.border = "0.1rem solid rgba(255, 255, 255, 0.2)";
-    surfaceBtn.style.backgroundColor = planets.neptune.color;
-    surfaceBtn.style.borderColor = planets.neptune.color;
-  });
-
-  overviewMobile.style.borderBottom = "4px solid #2D68F0";
-  structureMobile.style.backgroundColor = "transparent";
-  structureMobile.style.border = "none";
-  surfaceMobile.style.backgroundColor = "transparent";
-  surfaceMobile.style.border = "none";
-
-  overviewMobile.addEventListener("click", () => {
-    planetText.textContent = planets.neptune.overview;
-    planetImage.src = planets.neptune.image;
-    geologyImage.classList.add("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    overviewMobile.style.borderBottom = "4px solid #2D68F0";
-  });
-
-  structureMobile.addEventListener("click", () => {
-    planetText.textContent = planets.neptune.structure;
-    planetImage.src = planets.neptune.internal;
-    geologyImage.classList.add("hidden");
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    surfaceMobile.style.backgroundColor = "transparent";
-    surfaceMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    structureMobile.style.borderBottom = "4px solid #2D68F0";
-  });
-
-  surfaceMobile.addEventListener("click", () => {
-    planetText.textContent = planets.neptune.surface;
-    planetImage.src = planets.neptune.image;
-    geologyImage.src = planets.neptune.geology;
-    geologyImage.classList.remove("hidden");
-    structureMobile.style.backgroundColor = "transparent";
-    structureMobile.style.border = "none";
-    overviewMobile.style.backgroundColor = "transparent";
-    overviewMobile.style.border = "none";
-    // structureMobile.style.backgroundColor = planets.mercury.color;
-    surfaceMobile.style.borderBottom = "4px solid #2D68F0";
-  });
-});
