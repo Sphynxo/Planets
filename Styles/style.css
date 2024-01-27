@@ -114,6 +114,7 @@ main {
   opacity: 1;
   transform: scale(1.6);
   transition: all 0.2s ease-in-out;
+  color: #419EBB;
 }
 
 .btn-mobile-nav {
@@ -236,16 +237,18 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
-.btn:hover {
-  background-color: #d8d8d820;
-  border-color: #D8D8D820;
-}
+
 
 .active-btn {
   background-color: #419ebb;
   border: 0.1rem solid #419ebb;
   transition: all 0.2s ease-in-out;
 }
+
+/* .btn:hover {
+  background-color: #d8d8d820;
+  border-color: #D8D8D820;
+} */
 
 .btn-number {
   margin-right: 2.8rem;

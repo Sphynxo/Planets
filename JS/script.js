@@ -162,27 +162,38 @@ const revolution = document.querySelector(".revolution-info");
 const radius = document.querySelector(".radius-info");
 const temp = document.querySelector(".temp-info");
 const buttons = document.querySelectorAll(".btn");
-const activeBtn = document.querySelector('.active-btn')
+const activeBtn = document.querySelector(".active-btn");
 const planetNames = document.querySelectorAll(".main-nav-link");
-let currentPlanet = planets['mercury'];
+let currentPlanet = planets["mercury"];
 planetName.textContent = currentPlanet.name;
 description.textContent = currentPlanet.overview;
 rotate.textContent = currentPlanet.rotation;
 revolution.textContent = currentPlanet.revolution;
 radius.textContent = currentPlanet.radius;
-temp.textContent = currentPlanet.temperature
+temp.textContent = currentPlanet.temperature;
+
+
 
 
 planetNames.forEach((planet) =>
   planet.addEventListener("click", function () {
-    buttons.forEach((b) => b.classList.remove("active-btn"));
+    headerEl.classList.toggle("nav-open");
+    buttons.forEach((b) => {
+      b.classList.remove("active-btn")
+      b.style.backgroundColor = "transparent";
+      b.classList.contains('active-btn') ? b.style.borderColor = currentPlanet.color : b.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+    });
 
-    planetNames.forEach((p) => p.classList.remove("active-link"));
+    planetNames.forEach((p) => {
+      p.classList.remove("active-link");
+      p.style.color = "#ffffff";
+    });
     planet.classList.add("active-link");
     if (planet.classList.contains("active-link")) {
       const currentPlanetName = planet.textContent.toLowerCase();
       currentPlanet = planets[currentPlanetName];
       updateInfo(currentPlanet);
+      planet.style.color = currentPlanet.color;
     }
 
     function updateInfo(planet) {
@@ -193,25 +204,39 @@ planetNames.forEach((planet) =>
       radius.textContent = planet.radius;
       temp.textContent = planet.temperature;
       image.src = planet.image;
-      activeBtn.style.backgroundColor = planet.color
+      activeBtn.style.backgroundColor = planet.color;
     }
   })
 );
 
+
+
 buttons.forEach((button) =>
   button.addEventListener("click", function () {
-    buttons.forEach((b) => b.classList.remove("active-btn"));
+    buttons.forEach((b) => {
+      b.classList.remove("active-btn");
+      b.style.backgroundColor = "transparent";
+      b.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+    });
     button.classList.add("active-btn");
-    
+    button.style.backgroundColor = currentPlanet.color;
+    button.style.borderColor = currentPlanet.color;
+
     if (button.classList.contains("overview")) {
       description.textContent = currentPlanet.overview;
-      image.src = currentPlanet.image
+      image.src = currentPlanet.image;
     } else if (button.classList.contains("structure")) {
       description.textContent = currentPlanet.structure;
-      image.src = currentPlanet.internal
+      image.src = currentPlanet.internal;
     } else if (button.classList.contains("surface")) {
       description.textContent = currentPlanet.surface;
-      image.src = currentPlanet.geology
+      image.src = currentPlanet.geology;
+    }
+
+    if (button.classList.contains('btn-hover')) {
+      button.classList.remove('btn-hover');
+      button.offsetWidth;
+      button.classList.add('btn-hover');
     }
   })
 );
