@@ -17,6 +17,7 @@ const planets = {
     internal: "IMG/planet-mercury-internal.svg",
     geology: "IMG/geology-mercury.png",
     color: "#419EBB",
+    link: "https://en.wikipedia.org/wiki/Mercury_(planet)",
   },
 
   venus: {
@@ -35,6 +36,7 @@ const planets = {
     internal: "IMG/planet-venus-internal.svg",
     geology: "IMG/geology-venus.png",
     color: "#EDA249",
+    link: "https://en.wikipedia.org/wiki/Venus",
   },
 
   earth: {
@@ -53,6 +55,7 @@ const planets = {
     internal: "IMG/planet-earth-internal.svg",
     geology: "IMG/geology-earth.png",
     color: "#6D2ED5",
+    link: "https://en.wikipedia.org/wiki/Earth",
   },
 
   mars: {
@@ -71,6 +74,7 @@ const planets = {
     internal: "IMG/planet-mars-internal.svg",
     geology: "IMG/geology-mars.png",
     color: "#D14C32",
+    link: "https://en.wikipedia.org/wiki/Mars",
   },
 
   jupiter: {
@@ -89,6 +93,7 @@ const planets = {
     internal: "IMG/planet-jupiter-internal.svg",
     geology: "IMG/geology-jupiter.png",
     color: "#D83A34",
+    link: "https://en.wikipedia.org/wiki/Jupiter",
   },
 
   saturn: {
@@ -107,6 +112,7 @@ const planets = {
     internal: "IMG/planet-saturn-internal.svg",
     geology: "IMG/geology-saturn.png",
     color: "#CD5120",
+    link: "https://en.wikipedia.org/wiki/Saturn",
   },
 
   uranus: {
@@ -125,6 +131,7 @@ const planets = {
     internal: "IMG/planet-uranus-internal.svg",
     geology: "IMG/geology-uranus.png",
     color: "#1EC1A2",
+    link: "https://en.wikipedia.org/wiki/Uranus",
   },
 
   neptune: {
@@ -143,6 +150,7 @@ const planets = {
     internal: "IMG/planet-neptune-internal.svg",
     geology: "IMG/geology-neptune.png",
     color: "#2D68F0",
+    link: "https://en.wikipedia.org/wiki/Neptune",
   },
 };
 
@@ -156,7 +164,7 @@ btnNavEl.addEventListener("click", function () {
 const planetName = document.querySelector(".planet-name");
 const image = document.querySelector(".planet-image");
 const description = document.querySelector(".description");
-const link = document.querySelector(".link");
+const link = document.querySelector(".src-link");
 const rotate = document.querySelector(".rotate-info");
 const revolution = document.querySelector(".revolution-info");
 const radius = document.querySelector(".radius-info");
@@ -171,17 +179,17 @@ rotate.textContent = currentPlanet.rotation;
 revolution.textContent = currentPlanet.revolution;
 radius.textContent = currentPlanet.radius;
 temp.textContent = currentPlanet.temperature;
-
-
-
+link.href = currentPlanet.link
 
 planetNames.forEach((planet) =>
   planet.addEventListener("click", function () {
     headerEl.classList.toggle("nav-open");
     buttons.forEach((b) => {
-      b.classList.remove("active-btn")
+      b.classList.remove("active-btn");
       b.style.backgroundColor = "transparent";
-      b.classList.contains('active-btn') ? b.style.borderColor = currentPlanet.color : b.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+      b.classList.contains("active-btn")
+        ? (b.style.borderColor = currentPlanet.color)
+        : (b.style.borderColor = "rgba(255, 255, 255, 0.2)");
     });
 
     planetNames.forEach((p) => {
@@ -205,18 +213,17 @@ planetNames.forEach((planet) =>
       temp.textContent = planet.temperature;
       image.src = planet.image;
       activeBtn.style.backgroundColor = planet.color;
+      link.href = planet.link
     }
   })
 );
-
-
 
 buttons.forEach((button) =>
   button.addEventListener("click", function () {
     buttons.forEach((b) => {
       b.classList.remove("active-btn");
       b.style.backgroundColor = "transparent";
-      b.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+      b.style.borderColor = "rgba(255, 255, 255, 0.2)";
     });
     button.classList.add("active-btn");
     button.style.backgroundColor = currentPlanet.color;
@@ -233,11 +240,10 @@ buttons.forEach((button) =>
       image.src = currentPlanet.geology;
     }
 
-    if (button.classList.contains('btn-hover')) {
-      button.classList.remove('btn-hover');
+    if (button.classList.contains("btn-hover")) {
+      button.classList.remove("btn-hover");
       button.offsetWidth;
-      button.classList.add('btn-hover');
+      button.classList.add("btn-hover");
     }
   })
 );
-
